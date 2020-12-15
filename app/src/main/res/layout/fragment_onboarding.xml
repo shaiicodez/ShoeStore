@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="onBoardingViewModel"
+            type="com.udacity.shoestore.screens.onboarding.OnBoardingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/login_background"
+        tools:context=".screens.onboarding.OnboardingFragment">
+
+        <!-- Welcome Message -->
+        <TextView
+            android:id="@+id/welcome_txt"
+            style="@style/header_style"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="210dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/welcome_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Username -->
+        <TextView
+            android:id="@+id/username_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:fontFamily="@font/tenor_sans"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_38"
+            android:textStyle="bold|italic"
+            android:text="@string/shaima"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_txt" />
+
+        <!-- Enjoy Message -->
+        <TextView
+            android:id="@+id/welcome_message_txt"
+            style="@style/header_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="256dp"
+            android:text="@string/welcome_message"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username_txt" />
+
+        <!-- Read instructions button -->
+        <Button
+            android:id="@+id/instructionsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:drawableStart="@drawable/ic_arrow_forward"
+            android:text="@string/read_instructions"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textDirection="locale"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_message_txt" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
