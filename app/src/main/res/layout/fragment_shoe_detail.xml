@@ -3,12 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="details"
+            type="com.udacity.shoestore.models.Shoe" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/login_background"
         tools:context=".screens.details.ShoeDetailFragment">
-
 
         <TextView
             android:id="@+id/textView"

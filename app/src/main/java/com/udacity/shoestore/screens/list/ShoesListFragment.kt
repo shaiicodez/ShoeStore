@@ -14,6 +14,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoesListBinding
 import com.udacity.shoestore.SharedViewModel
@@ -26,14 +27,16 @@ class ShoesListFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle? ): View? {
+        savedInstanceState: Bundle?
+    ): View? {
 
         // Inflate the layout for this fragment
-        val  binding : FragmentShoesListBinding = DataBindingUtil.inflate(
+        val binding: FragmentShoesListBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_shoes_list,
             container,
-            false)
+            false
+        )
 
         // Specify the current activity as the lifecycle owner of the binding. This is used so that
         // the binding can observe LiveData updates
@@ -49,11 +52,14 @@ class ShoesListFragment : Fragment() {
                 // TODO (1): Linear View that contains data of one shoe
                 val linearLayout = LinearLayout(context)
                 // TODO (2): Linear View set up
-                val linearParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                val linearParams = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
                 linearLayout.orientation = LinearLayout.VERTICAL
-                linearParams.setMargins(0,0,0,15)
+                linearParams.setMargins(0, 0, 0, 15)
                 linearLayout.layoutParams = linearParams
-                linearLayout.setPadding(15,15,15,15)
+                linearLayout.setPadding(15, 15, 15, 15)
                 linearLayout.setBackgroundResource(R.color.white)
 
                 // TODO (3): textviews for the shoe data
@@ -95,11 +101,13 @@ class ShoesListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.logout ->
-                Navigation.createNavigateOnClickListener(R.id.action_shoesListFragment_to_loginFragment)
+        return when (item.itemId) {
+            R.id.logout -> {
+                findNavController().navigate(R.id.action_shoesListFragment_to_loginFragment)
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
 }
