@@ -19,8 +19,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding : FragmentLoginBinding
 
-    // Send username to other screens using bundle
-    private lateinit var username : String
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,15 +34,15 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = inflate(localInflater, R.layout.fragment_login, container, false)
 
-        //if user enters name in name texfield, send it on boarding screen to display it
-        username = binding.etUsername.text.toString()
+
 
         binding.signInBtn.setOnClickListener { view: View ->
 
-            // Using SafeArgs to send username entered into the field, so Directions are used
+            // Using SafeArgs to send username entered into the field, so Directions are use
+            //if user enters name in name textfield, send it on boarding screen to display it
             Navigation.findNavController(view).navigate(
-                LoginFragmentDirections.actionLoginFragmentToOnboardingFragment(
-                    username
+                LoginFragmentDirections.actionLoginFragmentToOnboardingFragment(    // Send username to other screens using bundle
+                    binding.etUsername.text.toString()
                 )
             )
         }
@@ -53,7 +52,7 @@ class LoginFragment : Fragment() {
             // Using SafeArgs to send username entered into the field, so Directions are used
             view.findNavController().navigate(
                 LoginFragmentDirections.actionLoginFragmentToOnboardingFragment(
-                    username
+                    binding.etUsername.text.toString()
                 )
             )
         }
