@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import com.udacity.shoestore.EditTextBindingAdapters
 import com.udacity.shoestore.R
 import com.udacity.shoestore.SharedViewModel
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
@@ -23,6 +24,7 @@ class ShoeDetailFragment : Fragment() {
     private lateinit var binding : FragmentShoeDetailBinding
     private val viewModel: SharedViewModel by activityViewModels()
     private lateinit var detailsViewModel: ShoeDetailViewModel
+    val editTextBinding : EditTextBindingAdapters
 
 
     override fun onCreateView(
@@ -38,7 +40,7 @@ class ShoeDetailFragment : Fragment() {
 
         //reference to view model
         //detailsViewModel = ViewModelProvider(this).get(ShoeDetailViewModel::class.java)
-
+        DataBindingUtil.setDefaultComponent(editTextBinding)
 
         // Add new shoes
         binding.addBtn.setOnClickListener { view : View ->
