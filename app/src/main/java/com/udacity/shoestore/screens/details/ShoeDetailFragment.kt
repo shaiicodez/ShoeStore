@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.udacity.shoestore.R
@@ -20,6 +22,8 @@ class ShoeDetailFragment : Fragment() {
 
     private lateinit var binding : FragmentShoeDetailBinding
     private val viewModel: SharedViewModel by activityViewModels()
+    private lateinit var detailsViewModel: ShoeDetailViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,11 +36,14 @@ class ShoeDetailFragment : Fragment() {
         // Cancel button
         binding.cancelBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_shoeDetailFragment_to_shoesListFragment))
 
+        //reference to view model
+        detailsViewModel = ViewModelProvider(this).get(ShoeDetailViewModel::class.java)
+
         // Add new shoes
         binding.addBtn.setOnClickListener { view : View ->
 
-            // Retrieve values of text views
-            val name = binding.etShoesName.text.toString()
+            // Retrieve values of text views thro view model
+            val name = detailsViewModel.name
             val size = binding.etShoesSize.text.toString().toDouble()
             val company = binding.etShoesCompany.text.toString()
             val desc = binding.etShoesDesc.text.toString()
@@ -57,3 +64,4 @@ class ShoeDetailFragment : Fragment() {
 
 
 }
+

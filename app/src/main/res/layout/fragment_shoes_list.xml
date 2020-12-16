@@ -3,41 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <!-- Parent view is constraint layout that places items according to
+        the relationship between them and the parent layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/login_background"
         tools:context=".screens.list.ShoesListFragment">
 
-        <!-- Scroll view that holds the parent view of linear layout items -->
+        <!-- Scroll view that holds the root view of linear layout items.
+            It will match parent view (ConstraintLayout) width and height to scroll
+            thru all list of items -->
         <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- parent view of linear layout items -->
+            <!-- root view of linear layout items which are add dynamically
+             and placed vertically according to orientation -->
             <LinearLayout
                 android:id="@+id/rootContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/margin_10">
+                android:layout_margin="@dimen/margin_10"
+                android:orientation="vertical">
 
             </LinearLayout>
 
         </ScrollView>
 
-        <!-- FAB used to add new shoes item -->
+        <!-- FAB used to add new shoes item. -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_shoes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="start|bottom"
-            android:layout_marginEnd="@dimen/margin_32"
-            android:layout_marginBottom="@dimen/margin_32"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
             android:contentDescription="@string/add"
-            android:src="@drawable/ic_add" />
-    </RelativeLayout>
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
