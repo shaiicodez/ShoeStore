@@ -37,7 +37,8 @@ class ShoeDetailFragment : Fragment() {
         binding.cancelBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_shoeDetailFragment_to_shoesListFragment))
 
         //reference to view model
-        detailsViewModel = ViewModelProvider(this).get(ShoeDetailViewModel::class.java)
+        //detailsViewModel = ViewModelProvider(this).get(ShoeDetailViewModel::class.java)
+
 
         // Add new shoes
         binding.addBtn.setOnClickListener { view : View ->
