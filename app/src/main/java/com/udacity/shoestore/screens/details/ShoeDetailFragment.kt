@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.R
 import com.udacity.shoestore.SharedViewModel
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
@@ -36,28 +39,26 @@ class ShoeDetailFragment : Fragment() {
         binding.cancelBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_shoeDetailFragment_to_shoesListFragment))
 
         //reference to view model
-        detailsViewModel = ViewModelProvider(this).get(ShoeDetailViewModel::class.java)
+        //detailsViewModel = ViewModelProvider(this).get(ShoeDetailViewModel::class.java)
 
         binding.apply {
             this.setLifecycleOwner(this@ShoeDetailFragment)
             this.detailViewModel = detailsViewModel
         }
 
-        // Add new shoes
-        binding.addBtn.setOnClickListener { view : View ->
+        detailsViewModel.navigateToList.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
 
-            // Retrieve values of text views thro view model
-            val name = detailsViewModel.etName.value.toString()
-            val size = detailsViewModel.etSize.value.toString().toDouble()
-            val company = detailsViewModel.etCompany.value.toString()
-            val desc = detailsViewModel.etDesc.value.toString()
-            // Create an instance of shoe model
-            val myShoes = Shoe(name,size,company,desc)
-            // Add the new shoes to our life data using add method
-            viewModel.addShoes(myShoes)
-            //go to list screen
-            view.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_shoeDetailFragment_to_shoesListFragment))
-        }
+                detailsViewModel.shoesList.observe(viewLifecycleOwner, Observer {
+
+                    // Add the new shoes to our life data using add method
+                    viewModel.addShoes(it)
+                })
+
+                //go to list screen
+                findNavController().navigate(R.id.action_shoeDetailFragment_to_shoesListFragment)
+            }
+        })
 
         return binding.root
     }
