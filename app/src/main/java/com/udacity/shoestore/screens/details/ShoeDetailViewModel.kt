@@ -12,11 +12,11 @@ import com.udacity.shoestore.Event
 import com.udacity.shoestore.models.Shoe
 
 
-class ShoeDetailViewModel : BaseObservable() {
+class ShoeDetailViewModel : ViewModel() {
 
     //navigate live data
-    private val _navigateToList = MutableLiveData<Event<String>>()
-    val navigateToList : LiveData<Event<String>>
+    private val _navigateToList = MutableLiveData<Boolean>()
+    val navigateToList : LiveData<Boolean>
         get() = _navigateToList
 
     // local access data
@@ -50,7 +50,11 @@ class ShoeDetailViewModel : BaseObservable() {
     val desc : LiveData<String>
         get() = _desc
 
-    @Bindable
+
+    fun userClickAdd(){
+        _navigateToList.value = true
+    }
+
     fun addShoes() {
 
         // Retrieve values of text views

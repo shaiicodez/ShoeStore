@@ -39,26 +39,25 @@ class ShoeDetailFragment : Fragment() {
         binding.cancelBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_shoeDetailFragment_to_shoesListFragment))
 
         //reference to view model
-        //detailsViewModel = ViewModelProvider(this).get(ShoeDetailViewModel::class.java)
+        detailsViewModel = ViewModelProvider(this).get(ShoeDetailViewModel::class.java)
 
         binding.apply {
             this.setLifecycleOwner(this@ShoeDetailFragment)
             this.detailViewModel = detailsViewModel
         }
 
-        detailsViewModel.navigateToList.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let {
 
-                detailsViewModel.shoesList.observe(viewLifecycleOwner, Observer {
+        // Add new shoes
+        binding.addBtn.setOnClickListener { view : View ->
+            detailsViewModel.addShoes()
+            detailsViewModel.shoesList.observe(viewLifecycleOwner, Observer {
+                // Add the new shoes to our life data using add method
+                viewModel.addShoes(it)
+            })
 
-                    // Add the new shoes to our life data using add method
-                    viewModel.addShoes(it)
-                })
-
-                //go to list screen
-                findNavController().navigate(R.id.action_shoeDetailFragment_to_shoesListFragment)
-            }
-        })
+            //go to list screen
+            view.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_shoeDetailFragment_to_shoesListFragment))
+        }
 
         return binding.root
     }
